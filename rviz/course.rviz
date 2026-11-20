@@ -1,0 +1,96 @@
+Panels:
+- Class: rviz_common/Displays
+  Name: Displays
+- Class: rviz_common/Views
+  Name: Views
+Visualization Manager:
+  Class: ''
+  Enabled: true
+  Global Options:
+    Background Color: 32; 37; 43
+    Fixed Frame: odom
+    Frame Rate: 30
+  Displays:
+  - Class: rviz_default_plugins/Map
+    Name: Learned map
+    Enabled: true
+    Alpha: 0.28
+    Color Scheme: map
+    Topic:
+      Value: /course/map
+      History Policy: Keep Last
+      Depth: 1
+      Reliability Policy: Reliable
+      Durability Policy: Transient Local
+  - Class: rviz_default_plugins/Grid
+    Name: Course grid
+    Enabled: true
+    Cell Size: 1
+    Plane Cell Count: 12
+    Color: 91; 103; 113
+    Offset: {X: 3.5, Y: 0, Z: -0.06}
+  - Class: rviz_default_plugins/RobotModel
+    Name: Car
+    Enabled: true
+    Visual Enabled: true
+    Collision Enabled: false
+    Description Source: Topic
+    Description Topic:
+      Value: /robot_description
+      Reliability Policy: Reliable
+      Durability Policy: Transient Local
+  - Class: rviz_default_plugins/MarkerArray
+    Name: Destinations and current route
+    Enabled: true
+    Topic:
+      Value: /course/markers
+      History Policy: Keep Last
+      Depth: 1
+      Reliability Policy: Reliable
+      Durability Policy: Transient Local
+  - Class: rviz_default_plugins/LaserScan
+    Name: LiDAR
+    Enabled: true
+    Style: Flat Squares
+    Size (m): 0.045
+    Position Transformer: XYZ
+    Color Transformer: FlatColor
+    Color: 248; 197; 99
+    Topic:
+      Value: /scan
+      Reliability Policy: Best Effort
+      Durability Policy: Volatile
+  - Class: rviz_default_plugins/Image
+    Name: Camera
+    Enabled: true
+    Topic:
+      Value: /camera/image_raw
+      Reliability Policy: Best Effort
+      Durability Policy: Volatile
+  Tools:
+  - Class: rviz_default_plugins/Interact
+  - Class: rviz_default_plugins/MoveCamera
+  - Class: rviz_default_plugins/FocusCamera
+  - Class: rviz_default_plugins/Measure
+  Transformation:
+    Current:
+      Class: rviz_default_plugins/TF
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 13
+      Focal Point: {X: 3.5, Y: 0, Z: 0}
+      Pitch: 1.28
+      Target Frame: <Fixed Frame>
+      Yaw: 4.71
+    Saved:
+    - Class: rviz_default_plugins/Orbit
+      Name: Follow car
+      Distance: 2.0
+      Focal Point: {X: 0, Y: 0, Z: 0}
+      Pitch: 0.65
+      Target Frame: base_link
+      Yaw: 0.75
+Window Geometry:
+  Width: 1200
+  Height: 800

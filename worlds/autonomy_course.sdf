@@ -1,0 +1,776 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.9">
+  <world name="autonomy_course">
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics" />
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands" />
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster" />
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu" />
+    <gravity>0 0 -9.8</gravity>
+    <physics name="physics" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+    </physics>
+    <light name="sun" type="directional">
+      <pose>0 0 8 0 0 0</pose>
+      <diffuse>0.9 0.9 0.9 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.3 0.2 -1</direction>
+      <cast_shadows>true</cast_shadows>
+    </light>
+    <scene>
+      <ambient>0.45 0.47 0.50 1</ambient>
+      <background>0.72 0.79 0.85 1</background>
+      <shadows>true</shadows>
+    </scene>
+    <model name="concrete_floor">
+      <static>true</static>
+      <pose>3.5 0 -0.10 0 0 0</pose>
+      <link name="link">
+        <collision name="slab_collision">
+          <geometry>
+            <box>
+              <size>11.2 8.2 0.2</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.85</mu>
+                <mu2>0.85</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="slab">
+          <geometry>
+            <box>
+              <size>11.2 8.2 0.2</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.32 0.35 0.37 1</ambient>
+            <diffuse>0.32 0.35 0.37 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="north_wall">
+      <static>true</static>
+      <pose>3.5 4 0.85 0 0 0</pose>
+      <link name="link">
+        <collision name="wall_collision">
+          <geometry>
+            <box>
+              <size>11.2 0.18 1.7</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="wall">
+          <geometry>
+            <box>
+              <size>11.2 0.18 1.7</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.60 0.64 0.67 1</ambient>
+            <diffuse>0.60 0.64 0.67 1</diffuse>
+          </material>
+        </visual>
+        <visual name="base_stripe">
+          <pose>0 0 -0.54 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>11.2 0.19 0.12</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.20 0.25 0.29 1</ambient>
+            <diffuse>0.20 0.25 0.29 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="south_wall">
+      <static>true</static>
+      <pose>3.5 -4 0.85 0 0 0</pose>
+      <link name="link">
+        <collision name="wall_collision">
+          <geometry>
+            <box>
+              <size>11.2 0.18 1.7</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="wall">
+          <geometry>
+            <box>
+              <size>11.2 0.18 1.7</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.60 0.64 0.67 1</ambient>
+            <diffuse>0.60 0.64 0.67 1</diffuse>
+          </material>
+        </visual>
+        <visual name="base_stripe">
+          <pose>0 0 -0.54 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>11.2 0.19 0.12</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.20 0.25 0.29 1</ambient>
+            <diffuse>0.20 0.25 0.29 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="west_wall">
+      <static>true</static>
+      <pose>-2 0 0.85 0 0 0</pose>
+      <link name="link">
+        <collision name="wall_collision">
+          <geometry>
+            <box>
+              <size>0.18 8.0 1.7</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="wall">
+          <geometry>
+            <box>
+              <size>0.18 8.0 1.7</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.60 0.64 0.67 1</ambient>
+            <diffuse>0.60 0.64 0.67 1</diffuse>
+          </material>
+        </visual>
+        <visual name="base_stripe">
+          <pose>0 0 -0.54 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.19 8.0 0.12</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.20 0.25 0.29 1</ambient>
+            <diffuse>0.20 0.25 0.29 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="east_wall">
+      <static>true</static>
+      <pose>9 0 0.85 0 0 0</pose>
+      <link name="link">
+        <collision name="wall_collision">
+          <geometry>
+            <box>
+              <size>0.18 8.0 1.7</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="wall">
+          <geometry>
+            <box>
+              <size>0.18 8.0 1.7</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.60 0.64 0.67 1</ambient>
+            <diffuse>0.60 0.64 0.67 1</diffuse>
+          </material>
+        </visual>
+        <visual name="base_stripe">
+          <pose>0 0 -0.54 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.19 8.0 0.12</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.20 0.25 0.29 1</ambient>
+            <diffuse>0.20 0.25 0.29 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="point_A">
+      <static>true</static>
+      <pose>0 0 0 0 0 0</pose>
+      <link name="link">
+        <visual name="painted_circle">
+          <pose>0 0 0.002 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>.63</radius>
+              <length>.003</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.10 0.60 0.30 1</ambient>
+            <diffuse>0.10 0.60 0.30 1</diffuse>
+          </material>
+        </visual>
+        <visual name="letter_0">
+          <pose>-0.105 0.0 .005 0 0 1.19991</pose>
+          <geometry>
+            <box>
+              <size>0.619 .07 .003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.96 0.96 0.96 1</ambient>
+            <diffuse>0.96 0.96 0.96 1</diffuse>
+          </material>
+        </visual>
+        <visual name="letter_1">
+          <pose>0.105 0.0 .005 0 0 -1.19991</pose>
+          <geometry>
+            <box>
+              <size>0.619 .07 .003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.96 0.96 0.96 1</ambient>
+            <diffuse>0.96 0.96 0.96 1</diffuse>
+          </material>
+        </visual>
+        <visual name="letter_2">
+          <pose>0.0 -0.06 .005 0 0 0.00000</pose>
+          <geometry>
+            <box>
+              <size>0.300 .07 .003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.96 0.96 0.96 1</ambient>
+            <diffuse>0.96 0.96 0.96 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="point_B">
+      <static>true</static>
+      <pose>7 -2.6 0 0 0 0</pose>
+      <link name="link">
+        <visual name="painted_circle">
+          <pose>0 0 0.002 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>.63</radius>
+              <length>.003</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.12 0.39 0.85 1</ambient>
+            <diffuse>0.12 0.39 0.85 1</diffuse>
+          </material>
+        </visual>
+        <visual name="letter_0">
+          <pose>-0.19 0.0 .005 0 0 1.57080</pose>
+          <geometry>
+            <box>
+              <size>0.580 .07 .003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.96 0.96 0.96 1</ambient>
+            <diffuse>0.96 0.96 0.96 1</diffuse>
+          </material>
+        </visual>
+        <visual name="letter_1">
+          <pose>-0.05 0.27 .005 0 0 0.00000</pose>
+          <geometry>
+            <box>
+              <size>0.320 .07 .003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.96 0.96 0.96 1</ambient>
+            <diffuse>0.96 0.96 0.96 1</diffuse>
+          </material>
+        </visual>
+        <visual name="letter_2">
+          <pose>0.14500000000000002 0.20500000000000002 .005 0 0 -0.86854</pose>
+          <geometry>
+            <box>
+              <size>0.210 .07 .003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.96 0.96 0.96 1</ambient>
+            <diffuse>0.96 0.96 0.96 1</diffuse>
+          </material>
+        </visual>
+        <visual name="letter_3">
+          <pose>0.14500000000000002 0.07 .005 0 0 -2.23677</pose>
+          <geometry>
+            <box>
+              <size>0.218 .07 .003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.96 0.96 0.96 1</ambient>
+            <diffuse>0.96 0.96 0.96 1</diffuse>
+          </material>
+        </visual>
+        <visual name="letter_4">
+          <pose>-0.05 0.0 .005 0 0 3.14159</pose>
+          <geometry>
+            <box>
+              <size>0.320 .07 .003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.96 0.96 0.96 1</ambient>
+            <diffuse>0.96 0.96 0.96 1</diffuse>
+          </material>
+        </visual>
+        <visual name="letter_5">
+          <pose>0.14500000000000002 -0.07 .005 0 0 -0.90483</pose>
+          <geometry>
+            <box>
+              <size>0.218 .07 .003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.96 0.96 0.96 1</ambient>
+            <diffuse>0.96 0.96 0.96 1</diffuse>
+          </material>
+        </visual>
+        <visual name="letter_6">
+          <pose>0.14500000000000002 -0.20500000000000002 .005 0 0 -2.27305</pose>
+          <geometry>
+            <box>
+              <size>0.210 .07 .003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.96 0.96 0.96 1</ambient>
+            <diffuse>0.96 0.96 0.96 1</diffuse>
+          </material>
+        </visual>
+        <visual name="letter_7">
+          <pose>-0.05 -0.27 .005 0 0 3.14159</pose>
+          <geometry>
+            <box>
+              <size>0.320 .07 .003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.96 0.96 0.96 1</ambient>
+            <diffuse>0.96 0.96 0.96 1</diffuse>
+          </material>
+        </visual>
+        <visual name="discovery_beacon">
+          <cast_shadows>false</cast_shadows>
+          <pose>0 0 .66 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>.095</radius>
+              <length>.60</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.015 0.11 0.95 1</ambient>
+            <diffuse>0.015 0.11 0.95 1</diffuse>
+            <emissive>0.015 0.11 0.95 1</emissive>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="crate_1">
+      <static>true</static>
+      <pose>2.3 -0.86 .36 0 0 0.12</pose>
+      <link name="link">
+        <collision name="crate_collision">
+          <geometry>
+            <box>
+              <size>.68 .68 .72</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="crate_visual">
+          <geometry>
+            <box>
+              <size>.68 .68 .72</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.66 0.39 0.18 1</ambient>
+            <diffuse>0.66 0.39 0.18 1</diffuse>
+          </material>
+        </visual>
+        <visual name="band_0">
+          <pose>0 -0.22 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>.686 .054 .726</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>.22 .26 .29 1</diffuse>
+          </material>
+        </visual>
+        <visual name="band_1">
+          <pose>0 0.22 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>.686 .054 .726</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>.22 .26 .29 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="crate_2">
+      <static>true</static>
+      <pose>4.5 -1.67 .36 0 0 -0.16</pose>
+      <link name="link">
+        <collision name="crate_collision">
+          <geometry>
+            <box>
+              <size>.68 .68 .72</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="crate_visual">
+          <geometry>
+            <box>
+              <size>.68 .68 .72</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.66 0.39 0.18 1</ambient>
+            <diffuse>0.66 0.39 0.18 1</diffuse>
+          </material>
+        </visual>
+        <visual name="band_0">
+          <pose>0 -0.22 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>.686 .054 .726</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>.22 .26 .29 1</diffuse>
+          </material>
+        </visual>
+        <visual name="band_1">
+          <pose>0 0.22 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>.686 .054 .726</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>.22 .26 .29 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="crate_3">
+      <static>true</static>
+      <pose>2.3 0.86 .36 0 0 -0.12</pose>
+      <link name="link">
+        <collision name="crate_collision">
+          <geometry>
+            <box>
+              <size>.68 .68 .72</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="crate_visual">
+          <geometry>
+            <box>
+              <size>.68 .68 .72</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.66 0.39 0.18 1</ambient>
+            <diffuse>0.66 0.39 0.18 1</diffuse>
+          </material>
+        </visual>
+        <visual name="band_0">
+          <pose>0 -0.22 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>.686 .054 .726</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>.22 .26 .29 1</diffuse>
+          </material>
+        </visual>
+        <visual name="band_1">
+          <pose>0 0.22 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>.686 .054 .726</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>.22 .26 .29 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="crate_4">
+      <static>true</static>
+      <pose>4.5 1.67 .36 0 0 0.16</pose>
+      <link name="link">
+        <collision name="crate_collision">
+          <geometry>
+            <box>
+              <size>.68 .68 .72</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="crate_visual">
+          <geometry>
+            <box>
+              <size>.68 .68 .72</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.66 0.39 0.18 1</ambient>
+            <diffuse>0.66 0.39 0.18 1</diffuse>
+          </material>
+        </visual>
+        <visual name="band_0">
+          <pose>0 -0.22 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>.686 .054 .726</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>.22 .26 .29 1</diffuse>
+          </material>
+        </visual>
+        <visual name="band_1">
+          <pose>0 0.22 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>.686 .054 .726</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>.22 .26 .29 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="crate_5">
+      <static>true</static>
+      <pose>7 -0.8 .36 0 0 0.14</pose>
+      <link name="link">
+        <collision name="crate_collision">
+          <geometry>
+            <box>
+              <size>.68 .68 .72</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="crate_visual">
+          <geometry>
+            <box>
+              <size>.68 .68 .72</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.66 0.39 0.18 1</ambient>
+            <diffuse>0.66 0.39 0.18 1</diffuse>
+          </material>
+        </visual>
+        <visual name="band_0">
+          <pose>0 -0.22 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>.686 .054 .726</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>.22 .26 .29 1</diffuse>
+          </material>
+        </visual>
+        <visual name="band_1">
+          <pose>0 0.22 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>.686 .054 .726</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>.22 .26 .29 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="crate_6">
+      <static>true</static>
+      <pose>7 0.8 .36 0 0 -0.14</pose>
+      <link name="link">
+        <collision name="crate_collision">
+          <geometry>
+            <box>
+              <size>.68 .68 .72</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="crate_visual">
+          <geometry>
+            <box>
+              <size>.68 .68 .72</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.66 0.39 0.18 1</ambient>
+            <diffuse>0.66 0.39 0.18 1</diffuse>
+          </material>
+        </visual>
+        <visual name="band_0">
+          <pose>0 -0.22 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>.686 .054 .726</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>.22 .26 .29 1</diffuse>
+          </material>
+        </visual>
+        <visual name="band_1">
+          <pose>0 0.22 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>.686 .054 .726</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>.22 .26 .29 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="point_C">
+      <static>true</static>
+      <pose>7 2.6 0 0 0 0</pose>
+      <link name="link">
+        <visual name="painted_circle">
+          <pose>0 0 .002 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>.63</radius>
+              <length>.003</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <diffuse>.84 .39 .13 1</diffuse>
+          </material>
+        </visual>
+        <visual name="letter_0">
+          <pose>0.135 0.26 .005 0 0 2.7091848780192556</pose>
+          <geometry>
+            <box>
+              <size>0.18317821063276354 .07 .003</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>.96 .96 .96 1</diffuse>
+          </material>
+        </visual>
+        <visual name="letter_1">
+          <pose>-0.03 0.26 .005 0 0 -2.8501358591119264</pose>
+          <geometry>
+            <box>
+              <size>0.24880613017821102 .07 .003</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>.96 .96 .96 1</diffuse>
+          </material>
+        </visual>
+        <visual name="letter_2">
+          <pose>-0.175 0.165 .005 0 0 -2.1763409903998667</pose>
+          <geometry>
+            <box>
+              <size>0.19811388300841898 .07 .003</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>.96 .96 .96 1</diffuse>
+          </material>
+        </visual>
+        <visual name="letter_3">
+          <pose>-0.22 0.0 .005 0 0 -1.5707963267948966</pose>
+          <geometry>
+            <box>
+              <size>0.24000000000000002 .07 .003</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>.96 .96 .96 1</diffuse>
+          </material>
+        </visual>
+        <visual name="letter_4">
+          <pose>-0.175 -0.165 .005 0 0 -0.9652516631899266</pose>
+          <geometry>
+            <box>
+              <size>0.19811388300841898 .07 .003</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>.96 .96 .96 1</diffuse>
+          </material>
+        </visual>
+        <visual name="letter_5">
+          <pose>-0.03 -0.26 .005 0 0 -0.29145679447786693</pose>
+          <geometry>
+            <box>
+              <size>0.24880613017821102 .07 .003</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>.96 .96 .96 1</diffuse>
+          </material>
+        </visual>
+        <visual name="letter_6">
+          <pose>0.135 -0.26 .005 0 0 0.4324077755705376</pose>
+          <geometry>
+            <box>
+              <size>0.18317821063276354 .07 .003</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>.96 .96 .96 1</diffuse>
+          </material>
+        </visual>
+        <visual name="discovery_beacon">
+          <cast_shadows>false</cast_shadows>
+          <pose>0 0 .66 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>.095</radius>
+              <length>.60</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.98 0.055 0.01 1</ambient>
+            <diffuse>0.98 0.055 0.01 1</diffuse>
+            <emissive>0.98 0.055 0.01 1</emissive>
+          </material>
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>

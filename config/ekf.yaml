@@ -1,0 +1,29 @@
+ekf_filter_node:
+  ros__parameters:
+    frequency: 30.0
+    sensor_timeout: 0.2
+    two_d_mode: true
+    publish_tf: true
+    odom_frame: odom
+    base_link_frame: base_link
+    world_frame: odom
+
+    # Wheel odometry supplies velocity. Its integrated position and yaw would
+    # reuse the same encoder data and accumulate skid-steer heading error.
+    odom0: /wheel/odometry
+    odom0_config: [false, false, false,
+                   false, false, false,
+                   true,  true,  false,
+                   false, false, false,
+                   false, false, false]
+    odom0_queue_size: 10
+
+    # Use the gyro's yaw rate. The Gazebo IMU also reports an orientation,
+    # but its yaw is relative to an initial reference.
+    imu0: /imu
+    imu0_config: [false, false, false,
+                  false, false, false,
+                  false, false, false,
+                  false, false, true,
+                  false, false, false]
+    imu0_queue_size: 10
